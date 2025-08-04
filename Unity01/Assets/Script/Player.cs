@@ -1,11 +1,15 @@
+using System.Linq.Expressions;
+using TMPro;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
 
+    private bool saltando; 
+
     void Start()
     {
-        
+        saltando = false;    
     }
 
     void Update()
@@ -23,10 +27,22 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             // transform.Translate(new Vector3(0.0f, 0.1f)); 
-
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(0.0f, 500.0f));
+            if (saltando == false)
+            {
+                GetComponent<Rigidbody2D>().AddForce(new Vector2(0.0f, 50.0f));
+                saltando = true;
+            }
         }
 
+    }
+
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Floor")
+        {
+            saltando = false;
+        }
     }
 
 }
