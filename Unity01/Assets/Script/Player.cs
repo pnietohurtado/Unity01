@@ -5,11 +5,13 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
-    private bool saltando; 
+    private bool saltando;
+    private int hp; 
 
     void Start()
     {
-        saltando = false;    
+        saltando = false;
+        hp = 3; 
     }
 
     void Update()
@@ -29,7 +31,7 @@ public class Player : MonoBehaviour
             // transform.Translate(new Vector3(0.0f, 0.1f)); 
             if (saltando == false)
             {
-                GetComponent<Rigidbody2D>().AddForce(new Vector2(0.0f, 50.0f));
+                GetComponent<Rigidbody2D>().AddForce(new Vector2(0.0f, 500.0f));
                 saltando = true;
             }
         }
@@ -42,6 +44,21 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "Floor")
         {
             saltando = false;
+        }
+
+        else if(collision.gameObject.tag == "Enemy")
+        {
+            
+            collision.gameObject.SetActive(false); 
+            Destroy(collision.gameObject, 0.5f);
+            hp--; 
+
+            if(hp <= 0)
+            {
+                Debug.Log("El jugador ha muerto"); 
+                gameObject.SetActive(false);
+            }
+            
         }
     }
 
