@@ -6,7 +6,9 @@ public class Player : MonoBehaviour
 {
 
     private bool saltando;
-    private int hp; 
+    private int hp;
+    public GameObject attack;
+    public GameObject posicion; 
 
     void Start()
     {
@@ -34,6 +36,11 @@ public class Player : MonoBehaviour
                 GetComponent<Rigidbody2D>().AddForce(new Vector2(0.0f, 500.0f));
                 saltando = true;
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            GameObject.Instantiate(attack, posicion.transform.position, posicion.transform.rotation); 
         }
 
     }

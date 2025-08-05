@@ -13,4 +13,7 @@ public class NewEmptyCSharpScript : MonoBehaviour
         transform.Translate(new Vector3(-0.1f, 0.0f)); 
     }
 
+
+   
+
 }
